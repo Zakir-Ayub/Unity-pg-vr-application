@@ -53,6 +53,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3621981467535291324}
     m_Modifications:
+    - target: {fileID: 109434732392105323, guid: 7811abe38615a86438f679bcf79f5b92, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c6d1ee044b4a42e44995df7a002a14a8, type: 2}
     - target: {fileID: 109434732395284509, guid: 7811abe38615a86438f679bcf79f5b92, type: 3}
       propertyPath: m_Name
       value: Custom Left Hand Model

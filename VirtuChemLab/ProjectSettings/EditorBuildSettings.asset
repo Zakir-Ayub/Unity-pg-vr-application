@@ -6,14 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Networking/SampleScene.unity
+    path: Assets/Scenes/laboratory_new_stuff/Networking/SampleScene.unity
     guid: ca3e06568441f8587930818ddbde48ab
   - enabled: 1
     path: Assets/Scenes/Laboratory.unity
     guid: d1f20b362b4d73b488dcc5c0d1da6b86
   - enabled: 1
+    path: Assets/Samples/Networking/Scenes/NetworkingSampleScene.unity
+    guid: 8d4a65109873f1c4692b90323ad7f1ab
+  - enabled: 1
+    path: Assets/Scenes/SeminarRoom.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
     path: 
     guid: 00000000000000000000000000000000
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2ff31a5d338079f4bb83baea4537aec3, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 72492d40e154fd2479508eee833b30ec, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 0fd04007c68ffcf46838e56c9e28166f, type: 2}

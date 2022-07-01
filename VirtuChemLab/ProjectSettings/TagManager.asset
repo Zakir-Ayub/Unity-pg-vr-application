@@ -5,19 +5,26 @@ TagManager:
   serializedVersion: 2
   tags:
   - VRPlayer
+  - ChemistryObject
+  - StirringFish
+  - Chemical
+  - Dissolve
+  - Whiteboard
+  - VRLeftHand
+  - VRRightHand
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - NaOh
   - Water
   - UI
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - LeftHandPhysics
+  - RightHandPhysics
   - 
   - 
   - 

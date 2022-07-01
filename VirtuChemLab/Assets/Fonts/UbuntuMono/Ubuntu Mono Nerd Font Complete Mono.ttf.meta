@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 4b64f63b1214e6e479f56f4e7f2f2bad
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - UbuntuMono Nerd Font Mono
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 12b4ac07c7c84bc4cbd61fb40dec53e5, type: 3}
+  - {fileID: 12800000, guid: 84d33667fcb1c8648951f831c3fe9a3b, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
