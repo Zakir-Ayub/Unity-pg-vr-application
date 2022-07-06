@@ -1,8 +1,12 @@
 using Unity.Netcode;
 using UnityEngine;
+using System;
 
 public class WaterController : NetworkBehaviour
 {
+    public GameObject waterObject;
+
+    [NonSerialized]
     public Material dissolveMat;
 
     [Tooltip("The max amount of water in the beaker in ml.")]
@@ -36,7 +40,7 @@ public class WaterController : NetworkBehaviour
     {
         reactionController = GetComponent<ChemicalReactionScript>();
         reactionController.setWater(water);
-
+        dissolveMat = waterObject.GetComponent<Renderer>().material;
         dissolveMat.SetFloat("_WaterAmount", MinSliderVal);
         
         waterAmount.OnValueChanged += (_, newWaterAmount) =>

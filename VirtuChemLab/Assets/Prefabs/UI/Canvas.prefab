@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 8394105792594337249}
   - component: {fileID: 8394105792594337248}
   - component: {fileID: 8394105792594337255}
-  - component: {fileID: 8394105792594337253}
-  - component: {fileID: 8394105792594337254}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -122,46 +120,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
---- !u!114 &8394105792594337253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8394105792594337243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 274bce6c1660ce34c9f1e5ec579340e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8394105792594337254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8394105792594337243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ae40d74b0c1da4bbe373321f9f0084, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  action: {fileID: 4532155863024332697, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  onInteract:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8394105792594337253}
-        m_TargetAssemblyTypeName: PopupUI, Assembly-CSharp
-        m_MethodName: ToggleMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &8394105792883419252
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +478,6 @@ GameObject:
   - component: {fileID: 8394105793662243584}
   - component: {fileID: 8394105793662243591}
   - component: {fileID: 8394105793662243590}
-  - component: {fileID: 8394105793662243589}
   m_Layer: 0
   m_Name: Confirmation_Button
   m_TagString: Untagged
@@ -630,7 +587,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8394105793662243589}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
         m_MethodName: Reload
         m_Mode: 1
@@ -642,18 +599,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8394105793662243589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8394105793662243835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14b0dee29322a6c41b8e360bcec5aed3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8394105793680673060
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,7 +854,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8394105792594337253}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PopupUI, Assembly-CSharp
         m_MethodName: ToggleMenu
         m_Mode: 1

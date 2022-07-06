@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: -5196298747777750936}
   - component: {fileID: 1080250066}
   - component: {fileID: 1080250067}
-  - component: {fileID: 1080250068}
+  - component: {fileID: 7233791540491301277}
   m_Layer: 0
   m_Name: Beaker_300ml (1)
   m_TagString: ChemistryObject
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b30fc9d5b70cc84ba105d44e36591a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dissolveMat: {fileID: 2100000, guid: ab34194610508e64db38880e78640f7c, type: 2}
+  waterObject: {fileID: 3671325954671876508}
   maxWater: 300
   waterAmount:
     m_InternalValue: 0
@@ -649,7 +649,7 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
---- !u!114 &1080250068
+--- !u!114 &7233791540491301277
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -658,7 +658,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3564720293296818341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7491a2847dd080a48a9f556d104144ed, type: 3}
+  m_Script: {fileID: 11500000, guid: b605cf06386145078ea636276df14bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}

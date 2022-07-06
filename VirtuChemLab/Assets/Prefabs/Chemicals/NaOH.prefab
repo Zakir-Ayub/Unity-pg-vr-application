@@ -134,8 +134,8 @@ MonoBehaviour:
     m_InternalValue: 0.5
   temperature:
     m_InternalValue: 25
-  heatflowRate:
-    m_InternalValue: 6
+  heatFlowRate:
+    m_InternalValue: 0
 --- !u!114 &7571683774587624065
 MonoBehaviour:
   m_ObjectHideFlags: 0

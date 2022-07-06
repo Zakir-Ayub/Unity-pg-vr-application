@@ -141,25 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8654742159303171647, guid: cbb3edf05bcea3e42ba924a045c68cd8, type: 3}
       propertyPath: m_Name
-      value: Canvas (1)
+      value: heatplate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbb3edf05bcea3e42ba924a045c68cd8, type: 3}
---- !u!1 &4641379586451377301 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3629094316333933852, guid: cbb3edf05bcea3e42ba924a045c68cd8, type: 3}
-  m_PrefabInstance: {fileID: 8229303750332131721}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7898151350047916823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4641379586451377301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 127ed161085327d42baa34c2bc6d140c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 0}

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7178683898349726347}
   - component: {fileID: 4541281546191355394}
   - component: {fileID: 313081651}
-  - component: {fileID: 4966022139577005707}
+  - component: {fileID: 174943241253146574}
   m_Layer: 0
   m_Name: StirringFish_6
   m_TagString: StirringFish
@@ -136,8 +136,8 @@ MonoBehaviour:
     m_InternalValue: 30
   temperature:
     m_InternalValue: 18
-  heatflowRate:
-    m_InternalValue: 7
+  heatFlowRate:
+    m_InternalValue: 0
 --- !u!114 &6748087292294669776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
---- !u!114 &4966022139577005707
+--- !u!114 &174943241253146574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6814220194887168147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7491a2847dd080a48a9f556d104144ed, type: 3}
+  m_Script: {fileID: 11500000, guid: b605cf06386145078ea636276df14bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1303319535563328728}
   - component: {fileID: 6331083541839905816}
   - component: {fileID: 6292143187536101616}
-  - component: {fileID: 2751619232853928465}
+  - component: {fileID: 4832330691451510014}
   m_Layer: 0
   m_Name: Thermometer
   m_TagString: ChemistryObject
@@ -162,7 +162,7 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
---- !u!114 &2751619232853928465
+--- !u!114 &4832330691451510014
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4144089354509134782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7491a2847dd080a48a9f556d104144ed, type: 3}
+  m_Script: {fileID: 11500000, guid: b605cf06386145078ea636276df14bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -787,6 +787,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
+--- !u!114 &7123798082109261884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6788192101310680245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 484f58e3fe462e945bf2f30ea0a53a54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 0}
 --- !u!114 &2936850795158884061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,16 +826,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DetailsPanel: {fileID: 0}
---- !u!114 &7123798082109261884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6788192101310680245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 484f58e3fe462e945bf2f30ea0a53a54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 0}

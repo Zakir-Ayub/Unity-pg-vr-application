@@ -4,6 +4,8 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using VR;
+using Network.XR;
+using System.Linq;
 
 namespace Network.VR
 { 
@@ -41,6 +43,8 @@ namespace Network.VR
         // rigidbody settings before grab 
         private bool wasKinematic, usedGravity;
         private float oldDrag, oldAngularDrag;
+
+        private HandPresencePhysics[] physicsHands;
             
         private void Start()
         {
@@ -53,6 +57,16 @@ namespace Network.VR
             
             interactable.activated.AddListener(OnActivateEnter);
             interactable.deactivated.AddListener(OnActivateExit);
+
+            physicsHands = FindObjectsOfType<HandPresencePhysics>();
+        }
+
+        private Vector3 getVelocity(GameObject handGameObject)
+        {
+            var hand = physicsHands.Where(
+                x => x.actionController.Equals(handGameObject.GetComponent<XRBaseController>())
+                ).First();
+            return hand.GetComponent<Rigidbody>().velocity;
         }
         
         private void OnSelectEntered(SelectEnterEventArgs args)
@@ -116,20 +130,20 @@ namespace Network.VR
             {
                 hand = Hand.Right;
             }
-
+            var velocity = getVelocity(handGameObject);
             if (IsClient)
             {
                 // reset velocity on client, otherwise the object might fall
                 // rapidly on the client which can cause de-sync
-                rigidbody.velocity = Vector3.zero;
+                rigidbody.velocity = velocity;
                 rigidbody.angularVelocity = Vector3.zero;
             }
-
-            OnSelectExitServerRpc(transform.position, transform.rotation, hand);
+            
+            OnSelectExitServerRpc(transform.position, transform.rotation, hand, velocity);
         }
     
         [ServerRpc(RequireOwnership = false)]
-        private void OnSelectExitServerRpc(Vector3 position, Quaternion rotation, Hand hand, ServerRpcParams args = default)
+        private void OnSelectExitServerRpc(Vector3 position, Quaternion rotation, Hand hand, Vector3 velocity, ServerRpcParams args = default)
         {
             ulong clientId = args.Receive.SenderClientId;
             
@@ -144,7 +158,8 @@ namespace Network.VR
             networkObject.transform.rotation = rotation;
             
             SetupRigidBodyDrop();
-            
+            rigidbody.velocity = velocity;
+
             OnDrop?.Invoke(GetPlayer(args.Receive.SenderClientId));
         }
         
@@ -158,7 +173,6 @@ namespace Network.VR
             rigidbody.drag = oldDrag;
             rigidbody.angularDrag = oldAngularDrag;
             
-            rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
         }
         

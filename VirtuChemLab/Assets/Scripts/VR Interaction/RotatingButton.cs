@@ -7,8 +7,8 @@ public class RotatingButton : MonoBehaviour
     // The Hand that currently grabbed the button
     XRSimpleInteractable simpleinteractable;
 
-    // The rotation of object when grabbing started
-    private float startRotation;
+    private Quaternion inverseHandStart;
+    private Quaternion buttonStart;
 
     enum Axis
     {
@@ -21,7 +21,6 @@ public class RotatingButton : MonoBehaviour
     [SerializeField]
     Axis axis = Axis.Z;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -29,35 +28,20 @@ public class RotatingButton : MonoBehaviour
         simpleinteractable.selectEntered.AddListener(ButtonGrabbed);
     }
 
-
     public void ButtonGrabbed(SelectEnterEventArgs args)
     {
-        if (simpleinteractable.firstInteractorSelecting != null)
-            return;
-        // Remember starting rotation
-        startRotation = getRotation(transform.rotation.eulerAngles);
+        inverseHandStart = Quaternion.Inverse(args.interactorObject.transform.rotation);
+        buttonStart = transform.rotation;
     }
 
-    private float getRotation(Vector3 g)
-    {
-        // return selected axis
-        return axis switch
-        {
-            Axis.X => g.x,
-            Axis.Y => g.y,
-            Axis.Z => g.z,
-            _ => 0
-        };
-    }
-
-    private Vector3 setRotation(float goalRotation)
+    private Vector3 setRotation(Vector3 goalRotation)
     {
         // return vector where the selected axis is modified
         return axis switch
         {
-            Axis.X => new Vector3(goalRotation, transform.eulerAngles.y, transform.eulerAngles.z),
-            Axis.Y => new Vector3(transform.eulerAngles.x, goalRotation, transform.eulerAngles.z),
-            Axis.Z => new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, goalRotation),
+            Axis.X => new Vector3(goalRotation.x, transform.eulerAngles.y, transform.eulerAngles.z),
+            Axis.Y => new Vector3(transform.eulerAngles.x, goalRotation.y, transform.eulerAngles.z),
+            Axis.Z => new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, goalRotation.z),
             _ => Vector3.zero
         };
     }
@@ -68,11 +52,8 @@ public class RotatingButton : MonoBehaviour
         var currentInteractor = simpleinteractable.firstInteractorSelecting;
         if (currentInteractor == null)
             return;
-        float newHandRotation = getRotation(currentInteractor.transform.eulerAngles);
-        float currentRotation = getRotation(transform.eulerAngles);
-        float rotationDifference = startRotation - newHandRotation;        
-        float goalRotation = rotationDifference + currentRotation;
-        transform.eulerAngles = setRotation(goalRotation);
-        startRotation = newHandRotation;
+        var handDiff = inverseHandStart * currentInteractor.transform.rotation;
+        var newRotation = buttonStart * Quaternion.Inverse(handDiff);
+        transform.eulerAngles = setRotation(newRotation.eulerAngles);
     }
 }
