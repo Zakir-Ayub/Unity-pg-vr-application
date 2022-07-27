@@ -3,12 +3,18 @@ using UnityEngine;
 
 public class ScaleTaraScript : MonoBehaviour, NetworkDeviceInteractor
 {
+    private AudioSource source;
+
     // this represents the ScaleController from the parent object
     private ScaleController scaleController;
+
+    [Tooltip("Sound that plays when the tare button is pressed")]
+    public AudioClip taraButton;
 
     // Start is called before the first frame update
     void Start()
     {
+        source = GetComponent<AudioSource>();
         scaleController = transform.parent.gameObject.GetComponent<ScaleController>();
     }
 
@@ -27,6 +33,7 @@ public class ScaleTaraScript : MonoBehaviour, NetworkDeviceInteractor
         // set the tara of the scale to the current internal weight on mouse click
         if(scaleController != null)
         {
+            source.PlayOneShot(taraButton, 1.0f);
             scaleController.TaraOffset = scaleController.Weight;
         }
     }

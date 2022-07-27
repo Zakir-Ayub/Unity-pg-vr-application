@@ -10,6 +10,8 @@ namespace Devices
     /// </summary>
     public class RotationItemDispenser : AbstractItemDispenser
     {
+        private AudioSource source;
+
         [Tooltip("Where to dispense the object")]
         public Transform spawnPoint;
 
@@ -29,6 +31,15 @@ namespace Devices
         [Tooltip("The number of items to dispense at once")]
         public int numItemsToDispenseAtOnce = 1;
 
+        [Tooltip("Sound that plays when the contents of the container is being poured")]
+        public AudioClip pouringSound;
+
+        void Start()
+        {
+            source = GetComponent<AudioSource>();
+
+        }
+
         private void Update()
         {
             if (!canDispense)
@@ -46,6 +57,7 @@ namespace Devices
                 float rotationLikeness = (Vector3.Dot(transform.up, desiredRotation) + 1) / 2;
                 if (rotationLikeness > rotationMinLikeness)
                 {
+                    source.PlayOneShot(pouringSound, 1.0F);
                     DispenseItems(spawnPoint.position, Quaternion.identity, numItemsToDispenseAtOnce);
                     canDispense = false;
                 }

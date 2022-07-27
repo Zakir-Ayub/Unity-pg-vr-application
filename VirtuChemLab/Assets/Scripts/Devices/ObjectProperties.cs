@@ -86,7 +86,26 @@ public class ObjectProperties : NetworkBehaviour
             }
         }
     }
-    
+
+
+    /// <summary>
+    /// The phValue of the object, on the scale of (mostly) 1-14.
+    /// </summary>
+    //private float heatFlowPerFrame;
+    [SerializeField, Tooltip("pH Value.")]
+    private NetworkDeviceValue<float> phValue = new NetworkDeviceValue<float>();
+    public float PhValue
+    {
+        get => phValue.Value;
+        set
+        {
+            if (IsServer)
+            {
+                phValue.Value = value;
+            }
+        }
+    }
+
     void Awake()
     {
         actualTemperature.Value = temperature.Value;

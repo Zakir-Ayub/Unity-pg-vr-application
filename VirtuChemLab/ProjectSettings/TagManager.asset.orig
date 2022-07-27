@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - VRPlayer
+  - ChemistryObject
+  - StirringFish
+<<<<<<< HEAD
+  - Surface
+  - Floor
+  - Scale
+=======
+  - Chemical
+  - Dissolve
+>>>>>>> 57c76cf6eec3a9850730ad93c53bb160db8e89bf
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - NaOh
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - LeftHandPhysics
+  - RightHandPhysics
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

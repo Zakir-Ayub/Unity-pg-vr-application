@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4671144816770678318, guid: 7d8b31e70c4bc154bb5029404922a60a, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
+      objectReference: {fileID: 0}
     - target: {fileID: -2576214409450247908, guid: 7d8b31e70c4bc154bb5029404922a60a, type: 3}
       propertyPath: weight
       value: 83.5
@@ -14,6 +18,18 @@ PrefabInstance:
     - target: {fileID: -2576214409450247908, guid: 7d8b31e70c4bc154bb5029404922a60a, type: 3}
       propertyPath: heatFlowRate
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 259873908769071370, guid: 7d8b31e70c4bc154bb5029404922a60a, type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 259873908769071370, guid: 7d8b31e70c4bc154bb5029404922a60a, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c1cfc55d16e223e4f806082b2f99b8d3, type: 3}
+    - target: {fileID: 567742761811173908, guid: 7d8b31e70c4bc154bb5029404922a60a, type: 3}
+      propertyPath: isFillingUp
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4678233555367296707, guid: 7d8b31e70c4bc154bb5029404922a60a, type: 3}
       propertyPath: m_RootOrder
@@ -92,3 +108,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.6637902, y: 4.0858207, z: 2.6637907}
   m_Center: {x: 0.00000011920929, y: 0.02153182, z: 0.00000029802322}
+--- !u!114 &6941901564402388186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7731122535985253190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1

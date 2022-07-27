@@ -6,8 +6,13 @@ using UnityEngine.UI;
 
 public class ScaleController : NetworkBehaviour
 {
+    private AudioSource source;
+
     [Tooltip("This is the text object that the weight will be displayed in.")]
     public Text textObject;
+
+    [Tooltip("Sound that plays when the on/off button is pressed")]
+    public AudioClip OnOffButton;
 
     private List<GameObject> collisionList = new List<GameObject>();
 
@@ -26,7 +31,13 @@ public class ScaleController : NetworkBehaviour
             taraOffset.Value = value;
         }
     }
-    
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         // Weight calculation should be server authoritative
@@ -108,6 +119,7 @@ public class ScaleController : NetworkBehaviour
     public void ToggleDeviceOn()
     {
         isDeviceTurnedOn.Value = !IsDeviceTurnedOn;
+        source.PlayOneShot(OnOffButton, 1.0f);
     }
 
     public void SetOnTop(GameObject go, bool isOnTop)

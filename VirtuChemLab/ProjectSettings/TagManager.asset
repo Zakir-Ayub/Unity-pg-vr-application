@@ -12,6 +12,16 @@ TagManager:
   - Whiteboard
   - VRLeftHand
   - VRRightHand
+  - Floor
+  - Surface
+  - Scale
+  - PlasticContainer
+  - Text
+  - PlasticLid
+  - WaterTab
+  - Valve
+  - MetalObject
+  - GlasObject
   layers:
   - Default
   - TransparentFX
@@ -25,8 +35,8 @@ TagManager:
   - 
   - LeftHandPhysics
   - RightHandPhysics
-  - 
-  - 
+  - ignore_drawer_door
+  - lab_instrument
   - 
   - 
   - 

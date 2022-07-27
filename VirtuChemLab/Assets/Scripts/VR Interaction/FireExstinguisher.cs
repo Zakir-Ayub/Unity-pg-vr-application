@@ -17,8 +17,20 @@ public class FireExstinguisher : MonoBehaviour
     //If the trigger is currently down
     bool triggerDown;
 
+    //sound components
+    private AudioSource source;
+
+    [Tooltip("Sound that plays when the fire extinguisher shoots foam")]
+    public AudioClip foamShoot;
+
+    private bool soundActive = false;
+
     protected void Start()
     {
+        source = GetComponent<AudioSource>();
+        source.clip= foamShoot;
+        source.loop = false;
+
         // Subscribe to Interactable Events
         interactableBase = GetComponent<XRGrabInteractable>();
         interactableBase.selectExited.AddListener(Dropped);
@@ -37,7 +49,14 @@ public class FireExstinguisher : MonoBehaviour
                 if (!bubbleParticleSystem.isPlaying)
                 {
                     // start particle system
-                    bubbleParticleSystem.Play();    
+                    bubbleParticleSystem.Play();
+                    if (!soundActive)
+                    {
+                        soundActive = true;
+                        source.loop = true;
+                        source.Play();
+                    }
+
                 }
             }
         }
@@ -48,6 +67,8 @@ public class FireExstinguisher : MonoBehaviour
         triggerDown = false;
         triggerHeldTime = 0f;
         bubbleParticleSystem.Stop();
+        soundActive = false;
+        source.loop = false;
     }
 
     // Event Handlers
