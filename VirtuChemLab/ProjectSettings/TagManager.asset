@@ -22,6 +22,7 @@ TagManager:
   - Valve
   - MetalObject
   - GlasObject
+  - Heatplate
   layers:
   - Default
   - TransparentFX
@@ -35,8 +36,8 @@ TagManager:
   - 
   - LeftHandPhysics
   - RightHandPhysics
-  - ignore_drawer_door
-  - lab_instrument
+  - 
+  - 
   - 
   - 
   - 

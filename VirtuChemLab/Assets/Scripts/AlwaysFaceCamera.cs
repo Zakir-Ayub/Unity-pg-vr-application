@@ -6,14 +6,14 @@ using System.Collections;
  {
  
  
-     public Transform camera;
+     public Transform cameraToFace;
  
  
      // Use this for initialization
      void Start () 
      {
  
-         camera = Camera.main.transform;
+         cameraToFace = Camera.main.transform;
  
      }
  
@@ -21,7 +21,7 @@ using System.Collections;
      void Update()
      {
          // Rotate the camera every frame so it keeps looking at the target
-         transform.LookAt(camera);
+         transform.LookAt(cameraToFace);
      }
  
  }

@@ -14,10 +14,23 @@ public class ScaleController : NetworkBehaviour
     [Tooltip("Sound that plays when the on/off button is pressed")]
     public AudioClip OnOffButton;
 
+    // this list contains all objects that are used for the weight calculation of the scale
     private List<GameObject> collisionList = new List<GameObject>();
 
+    // necessary network variables below
     private NetworkDeviceValue<bool> isDeviceTurnedOn = new NetworkDeviceValue<bool>(true);
-    public bool IsDeviceTurnedOn => isDeviceTurnedOn.Value;
+    public bool IsDeviceTurnedOn
+    {
+        get
+        {
+            return isDeviceTurnedOn.Value;
+        }
+        set
+        {
+            if(IsServer)
+                isDeviceTurnedOn.Value = value;
+        }
+    }
 
     private NetworkDeviceValue<float> weight = new NetworkDeviceValue<float>(0);
     public float Weight => weight.Value;
@@ -28,7 +41,8 @@ public class ScaleController : NetworkBehaviour
         get => taraOffset.Value;
         set
         {
-            taraOffset.Value = value;
+            if (IsServer)
+                taraOffset.Value = value;
         }
     }
 
@@ -40,7 +54,7 @@ public class ScaleController : NetworkBehaviour
 
     void Update()
     {
-        // Weight calculation should be server authoritative
+        // weight calculation should be server authoritative
         if (IsServer)
         {
             weight.Value = CalculateWeight();
@@ -86,12 +100,12 @@ public class ScaleController : NetworkBehaviour
         if(!other.gameObject.CompareTag("ChemistryObject") && !other.gameObject.CompareTag("StirringFish")) return; // if it does not have the ChemistryObject or StirringFish tag it should be ignored
 
         ScaleTouchController scaleTouchController = other.gameObject.GetComponent<ScaleTouchController>();
-        if(scaleTouchController)
+        if(scaleTouchController) // if object with a ScaleTouchController
         {
             // update the touching gameobject's ScaleTouchController fields and add it to the collisionList
             scaleTouchController.scale = gameObject;
             scaleTouchController.touchesScale = true;
-            if(!collisionList.Contains(other.gameObject))
+            if(!collisionList.Contains(other.gameObject)) // if object not contained in list yet
             {
                 collisionList.Add(other.gameObject);
             }
@@ -103,10 +117,10 @@ public class ScaleController : NetworkBehaviour
     {
         if(!other.gameObject.CompareTag("ChemistryObject") && !other.gameObject.CompareTag("StirringFish")) return; // if it does not have the ChemistryObject or StirringFish tag it should be ignored
 
-        if(collisionList.Contains(other.gameObject))
+        if(collisionList.Contains(other.gameObject)) // if other object is contained in the collisionList
         {
             ScaleTouchController scaleTouchController = other.gameObject.GetComponent<ScaleTouchController>();
-            if(scaleTouchController != null)
+            if(scaleTouchController != null) // if object with a ScaleTouchController
             {
                 // update the no longer touching gameobject's ScaleTouchController fields and remove it from the collisionList
                 scaleTouchController.scale = null;
@@ -116,26 +130,47 @@ public class ScaleController : NetworkBehaviour
         }
     }
 
+    // toggles the scale on and off
     public void ToggleDeviceOn()
     {
-        isDeviceTurnedOn.Value = !IsDeviceTurnedOn;
+        ToggleDeviceOnServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ToggleDeviceOnServerRpc()
+    {
+        IsDeviceTurnedOn = !IsDeviceTurnedOn;
         source.PlayOneShot(OnOffButton, 1.0f);
     }
 
-    public void SetOnTop(GameObject go, bool isOnTop)
+    public void SetInternalWeight()
     {
-        if (!IsOnTop(go) && isOnTop)
+        SetInternalWeightServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetInternalWeightServerRpc()
+    {
+        TaraOffset = Weight;
+    }
+
+
+    // handles the adding and removing of objects to the collisionList accordingly
+    public void SetOnTop(GameObject gameObject, bool isOnTop)
+    {
+        if (!IsOnTop(gameObject) && isOnTop)
         {
-            collisionList.Add(go);
+            collisionList.Add(gameObject);
         }
-        else if (IsOnTop(go) && !isOnTop)
+        else if (IsOnTop(gameObject) && !isOnTop)
         {
-            collisionList.Remove(go);
+            collisionList.Remove(gameObject);
         }
     }
     
-    public bool IsOnTop(GameObject go)
+    // checks if object is contained in the collisionList
+    public bool IsOnTop(GameObject gameObject)
     {
-        return collisionList.Contains(go);
+        return collisionList.Contains(gameObject);
     }
 }

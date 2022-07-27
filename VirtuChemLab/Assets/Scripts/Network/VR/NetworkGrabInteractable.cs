@@ -1,11 +1,11 @@
 using System.Collections;
+using System.Linq;
 using Network.Transform;
+using Network.XR;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using VR;
-using Network.XR;
-using System.Linq;
 
 namespace Network.VR
 { 
@@ -36,7 +36,7 @@ namespace Network.VR
         private XRGrabInteractable interactable;
         
         // register listeners on these events to know when another player interacted
-        public InteractDelegate OnGrab, OnDrop, OnActivate, OnDeactivate;
+        public InteractDelegate OnFirstGrab, OnGrab, OnDrop, OnLastDrop, OnActivate, OnDeactivate;
         
         private new Rigidbody rigidbody;
         
@@ -51,8 +51,8 @@ namespace Network.VR
             rigidbody = GetComponent<Rigidbody>();
             interactable = GetComponent<XRGrabInteractable>();
             networkObject = GetComponent<NetworkObject>();
-
-            interactable.selectEntered.AddListener(OnSelectEntered);
+            
+            interactable.selectEntered.AddListener(OnSelectEnter);
             interactable.selectExited.AddListener(OnSelectExit);
             
             interactable.activated.AddListener(OnActivateEnter);
@@ -61,43 +61,52 @@ namespace Network.VR
             physicsHands = FindObjectsOfType<HandPresencePhysics>();
         }
 
-        private Vector3 getVelocity(GameObject handGameObject)
+        private Vector3 GetVelocity(GameObject handGameObject)
         {
-            var hand = physicsHands.Where(
-                x => x.actionController.Equals(handGameObject.GetComponent<XRBaseController>())
-                ).First();
+            var hand = physicsHands.First(x => x.actionController.Equals(handGameObject.GetComponent<XRBaseController>()));
             return hand.GetComponent<Rigidbody>().velocity;
         }
-        
-        private void OnSelectEntered(SelectEnterEventArgs args)
+
+        private void OnSelectEnter(SelectEnterEventArgs args)
         {
-            GameObject handGameObject = args.interactorObject.transform.gameObject;
-            Hand hand = Hand.Unknown;
-            if (handGameObject.CompareTag(VRLeftHandTag))
+            Hand hand = GetHand(args.interactorObject.transform.gameObject);
+
+            if (interactable.interactorsSelecting.Count == 1)
             {
-                hand = Hand.Left;
+                OnFirstSelectEnterServerRpc(hand);
             }
-            else if (handGameObject.CompareTag(VRRightHandTag))
-            {
-                hand = Hand.Right;
-            }
-            
-            OnSelectEnteredServerRpc(hand);
+            OnSelectEnterServerRpc(hand);
         }
-    
+        
         [ServerRpc(RequireOwnership = false)]
-        private void OnSelectEnteredServerRpc(Hand hand, ServerRpcParams args = default)
+        private void OnFirstSelectEnterServerRpc(Hand hand, ServerRpcParams args = default)
         {
             ulong clientId = args.Receive.SenderClientId;
-            
-            // temporarily disable players hand collider
-            SetPlayerHandCollider(clientId, hand, false);
 
-            // must be called before setting ownershi
+            // must be called before setting ownership
             SetupRigidBodyGrab();
             
             // if the client wants to move the object, he needs to own it
             networkObject.ChangeOwnership(clientId);
+            
+            // to minimize desync, client can also move children network objects
+            foreach (UnityEngine.Transform child in transform.GetComponentsInChildren<UnityEngine.Transform>())
+            {
+                NetworkObject childNetworkObject = child.GetComponent<NetworkObject>();
+                if (childNetworkObject)
+                {
+                    childNetworkObject.ChangeOwnership(clientId);
+                }
+            }
+            
+            OnFirstGrab?.Invoke(GetPlayer(args.Receive.SenderClientId));
+        }
+    
+        [ServerRpc(RequireOwnership = false)]
+        private void OnSelectEnterServerRpc(Hand hand, ServerRpcParams args = default)
+        {
+            // temporarily disable players hand collider
+            SetPlayerHandCollider(args.Receive.SenderClientId, hand, false);
             
             OnGrab?.Invoke(GetPlayer(args.Receive.SenderClientId));
         }
@@ -112,7 +121,8 @@ namespace Network.VR
             usedGravity = rigidbody.useGravity;
             oldDrag = rigidbody.drag;
             oldAngularDrag = rigidbody.angularDrag;
-            rigidbody.isKinematic = true;
+            rigidbody.isKinematic = interactable.movementType == XRBaseInteractable.MovementType.Instantaneous ||
+                                    interactable.movementType == XRBaseInteractable.MovementType.Kinematic;
             rigidbody.useGravity = false;
             rigidbody.drag = 0f;
             rigidbody.angularDrag = 0f;
@@ -121,16 +131,8 @@ namespace Network.VR
         private void OnSelectExit(SelectExitEventArgs args)
         {
             GameObject handGameObject = args.interactorObject.transform.gameObject;
-            Hand hand = Hand.Unknown;
-            if (handGameObject.CompareTag(VRLeftHandTag))
-            {
-                hand = Hand.Left;
-            }
-            else if (handGameObject.CompareTag(VRRightHandTag))
-            {
-                hand = Hand.Right;
-            }
-            var velocity = getVelocity(handGameObject);
+            Hand hand = GetHand(handGameObject);
+            var velocity = GetVelocity(handGameObject);
             if (IsClient)
             {
                 // reset velocity on client, otherwise the object might fall
@@ -139,11 +141,15 @@ namespace Network.VR
                 rigidbody.angularVelocity = Vector3.zero;
             }
             
-            OnSelectExitServerRpc(transform.position, transform.rotation, hand, velocity);
+            OnSelectExitServerRpc(hand, transform.position, transform.rotation, velocity);
+            if (interactable.interactorsSelecting.Count == 0)
+            {
+                OnLastSelectExitServerRpc();
+            }
         }
     
         [ServerRpc(RequireOwnership = false)]
-        private void OnSelectExitServerRpc(Vector3 position, Quaternion rotation, Hand hand, Vector3 velocity, ServerRpcParams args = default)
+        private void OnSelectExitServerRpc(Hand hand, Vector3 position, Quaternion rotation, Vector3 velocity, ServerRpcParams args = default)
         {
             ulong clientId = args.Receive.SenderClientId;
             
@@ -153,14 +159,30 @@ namespace Network.VR
             // set owner back to server
             networkObject.ChangeOwnership(NetworkManager.ServerClientId);
             
+            // also set children owner back to server
+            foreach (UnityEngine.Transform child in transform.GetComponentsInChildren<UnityEngine.Transform>())
+            {
+                NetworkObject childNetworkObject = child.GetComponent<NetworkObject>();
+                if (childNetworkObject)
+                {
+                    childNetworkObject.ChangeOwnership(NetworkManager.ServerClientId);
+                }
+            }
+            
             // set last known position to minimize de-sync
             networkObject.transform.position = position;
             networkObject.transform.rotation = rotation;
             
             SetupRigidBodyDrop();
             rigidbody.velocity = velocity;
-
+            
             OnDrop?.Invoke(GetPlayer(args.Receive.SenderClientId));
+        }
+        
+        [ServerRpc(RequireOwnership = false)]
+        private void OnLastSelectExitServerRpc(ServerRpcParams args = default)
+        {
+            OnLastDrop?.Invoke(GetPlayer(args.Receive.SenderClientId));
         }
         
         /// <summary>
@@ -220,6 +242,21 @@ namespace Network.VR
                         break;
                 }
             }
+        }
+
+        private Hand GetHand(GameObject handGameObject)
+        {
+            Hand hand = Hand.Unknown;
+            if (handGameObject.CompareTag(VRLeftHandTag))
+            {
+                hand = Hand.Left;
+            }
+            else if (handGameObject.CompareTag(VRRightHandTag))
+            {
+                hand = Hand.Right;
+            }
+
+            return hand;
         }
     }
 }

@@ -1098,8 +1098,8 @@ GameObject:
   - component: {fileID: 8302750543775546393}
   - component: {fileID: 115122342}
   - component: {fileID: 5580478257078318417}
-  - component: {fileID: 7533593929992779058}
-  - component: {fileID: 8992420878073464528}
+  - component: {fileID: 1947746629}
+  - component: {fileID: 1947746628}
   m_Layer: 0
   m_Name: Container
   m_TagString: PlasticContainer
@@ -1225,7 +1225,7 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
---- !u!114 &7533593929992779058
+--- !u!114 &1947746629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7602641029504902794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b605cf06386145078ea636276df14bb8, type: 3}
+  m_Script: {fileID: 11500000, guid: f0059d48c680d0146a3fefc7a97254f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -1340,7 +1340,7 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
---- !u!114 &8992420878073464528
+--- !u!114 &1947746628
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

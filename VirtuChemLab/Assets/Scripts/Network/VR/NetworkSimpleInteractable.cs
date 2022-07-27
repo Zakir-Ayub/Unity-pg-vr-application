@@ -12,7 +12,6 @@ namespace Network.VR
     /// For now these listeners will only be informed on the server.
     /// </summary>
     [RequireComponent(typeof(XRSimpleInteractable))]
-    [RequireComponent(typeof(NetworkOwnerTransform))]
     [RequireComponent(typeof(NetworkObject))]
     public class NetworkSimpleInteractable : AbstractNetworkInteractable
     {

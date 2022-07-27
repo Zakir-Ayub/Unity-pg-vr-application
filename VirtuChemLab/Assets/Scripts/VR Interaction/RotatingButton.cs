@@ -4,7 +4,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(XRSimpleInteractable))]
 public class RotatingButton : MonoBehaviour
 {
-    // The Hand that currently grabbed the button
     XRSimpleInteractable simpleinteractable;
 
     private Quaternion inverseHandStart;

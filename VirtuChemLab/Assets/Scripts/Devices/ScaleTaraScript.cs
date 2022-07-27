@@ -1,7 +1,8 @@
-using Network.Device;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-public class ScaleTaraScript : MonoBehaviour, NetworkDeviceInteractor
+public class ScaleTaraScript : MonoBehaviour
 {
     private AudioSource source;
 
@@ -15,7 +16,8 @@ public class ScaleTaraScript : MonoBehaviour, NetworkDeviceInteractor
     void Start()
     {
         source = GetComponent<AudioSource>();
-        scaleController = transform.parent.gameObject.GetComponent<ScaleController>();
+        scaleController = transform.parent.GetComponent<ScaleController>();
+        Assert.IsTrue(scaleController != null, "Error, scalecontroller not found");
     }
 
     void OnMouseDown()
@@ -23,19 +25,11 @@ public class ScaleTaraScript : MonoBehaviour, NetworkDeviceInteractor
         SetInternalWeight();
     }
 
-    public void OnInteract(GameObject player)
-    {
-        SetInternalWeight();
-    }
-
     private void SetInternalWeight()
     {
-        // set the tara of the scale to the current internal weight on mouse click
-        if(scaleController != null)
-        {
-            source.PlayOneShot(taraButton, 1.0f);
-            scaleController.TaraOffset = scaleController.Weight;
-        }
+        // set the tara of the scale to the current internal weight on mouse click        
+        source.PlayOneShot(taraButton, 1.0f);
+        scaleController.SetInternalWeight();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,6 +37,6 @@ public class ScaleTaraScript : MonoBehaviour, NetworkDeviceInteractor
         // Check if collider is left or right hand via layer
         int layer = other.gameObject.layer;
         if (!other.isTrigger && (layer == 10 || layer == 11))
-            OnMouseDown();
+            SetInternalWeight();
     }
 }

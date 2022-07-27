@@ -49,7 +49,7 @@ public class SoundsGlassErlenmeyerFlask : MonoBehaviour
         //determining the correct sound to play for the collision
 
         //tables and washbasin
-        if (coll.gameObject.CompareTag("Surface") && retriggerWaitTime == 0.0f)
+        if (coll.gameObject.CompareTag("Surface") && retriggerWaitTime == 0.0f && coll.relativeVelocity.magnitude > 1.3f)
         {
             source.PlayOneShot(glasHittingHardSurfaceSound, 0.4F);
             if (vs != null)
@@ -69,7 +69,7 @@ public class SoundsGlassErlenmeyerFlask : MonoBehaviour
             }
         }
 
-        if (coll.gameObject.CompareTag("Scale") && retriggerWaitTime == 0.0f)
+        if ((coll.gameObject.CompareTag("Scale") || coll.gameObject.CompareTag("Heatplate")) && retriggerWaitTime == 0.0f)
         {
             source.PlayOneShot(glasHittingHardSurfaceSound, 0.5F);
             if (vs != null)

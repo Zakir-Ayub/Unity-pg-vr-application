@@ -8,19 +8,21 @@ public class SpraybottleController : MonoBehaviour
 {
 
     [Tooltip("The particle system of the water")]
-    [SerializeField] ParticleSystem particleSystem = null;
+    [SerializeField] ParticleSystem sprayParticleSystem = null;
 
     [Tooltip("The maximum emission rate over time for the particle system when held upside-down")]
     public int maxEmissionRateOverTime = 500;
 
-    //the time the trigger has to be held for activation
+    // the time the trigger has to be held for activation
     private const float heldThreshold = 0.2f;
-    //the GrabInteractable of the object
+    // the GrabInteractable of the object
     private XRGrabInteractable interactableBase;
-    //tracks the time the trigger is held for
+    // tracks the time the trigger is held for
     private float triggerHeldTime;
-    //true if the trigger is currently pressed, false otherwise
-    private bool triggerDown;
+
+    //for sound purposes
+    [HideInInspector]
+    public bool isSpraying=false;
 
     // State transition actions
     [SerializeField]
@@ -31,11 +33,10 @@ public class SpraybottleController : MonoBehaviour
 
     protected void Start()
     {
-        particleSystem.Stop();
-        // Subscribe to Interactable Events
+        sprayParticleSystem.Stop(); // should not be running by default
+        // subscribe to Interactable Events
         interactableBase = GetComponent<XRGrabInteractable>();
         interactableBase.selectExited.AddListener(Dropped);
-        interactableBase.activated.AddListener(TriggerPulled);
         interactableBase.deactivated.AddListener(TriggerReleased);
     }
 
@@ -43,50 +44,53 @@ public class SpraybottleController : MonoBehaviour
     {
         var triggerValue = triggerAction.action.ReadValue<float>();
         
-        // if (triggerDown)
+        // true once trigger is pressed slightly
         if (triggerValue > 0)
         {
             triggerHeldTime += Time.deltaTime;
-            // Only activate once the trigger is held the specified amount
+            // only activate once the trigger is held for at least the specified amount
             if (triggerHeldTime >= heldThreshold)
             {
-                if (!particleSystem.isPlaying)
+                if (!sprayParticleSystem.isPlaying)
                 {
-                    // start particle system
-                    particleSystem.Play();
+                    // start ParticleSystem
+                    sprayParticleSystem.Play();
+                    isSpraying = true;
                 }
-                var em = particleSystem.emission;
-                em.rateOverTime = maxEmissionRateOverTime * triggerValue;
+                var em = sprayParticleSystem.emission;
+                em.rateOverTime = maxEmissionRateOverTime * triggerValue; // change emission rate of ParticleSystem based on how much the trigger is held
             }
         }
         else {
-            var em = particleSystem.emission;
+            // stop emitting particles when trigger not held
+            var em = sprayParticleSystem.emission;
             em.rateOverTime = 0;
+            if (sprayParticleSystem.isPlaying)
+            {
+                // stop ParticleSystem
+                isSpraying = false;
+                sprayParticleSystem.Stop();
+            }
         }
     }
 
-    // Stop Particle System
-    void stop()
+    // stops the ParticleSystem
+    private void Stop()
     {
-        triggerDown = false;
+        isSpraying = false;
         triggerHeldTime = 0f;
-        particleSystem.Stop();
+        sprayParticleSystem.Stop();
     }
 
     // Event Handlers
 
     void TriggerReleased(DeactivateEventArgs args)
     {
-        stop();
-    }
-
-    void TriggerPulled(ActivateEventArgs args)
-    {
-        triggerDown = true;
+        Stop();
     }
 
     void Dropped(SelectExitEventArgs args)
     {
-        stop();
+        Stop();
     }
 }

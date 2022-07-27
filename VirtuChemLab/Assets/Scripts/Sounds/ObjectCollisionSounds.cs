@@ -39,7 +39,7 @@ public class ObjectCollisionSounds : MonoBehaviour
         //determining the correct sound to play for the collision
 
         //tables and washbasin
-        if (coll.gameObject.CompareTag("Surface") && retriggerWaitTime == 0.0f)
+        if (coll.gameObject.CompareTag("Surface") && retriggerWaitTime == 0.0f && coll.relativeVelocity.magnitude > 1.3f)
         {
             source.PlayOneShot(HittingHardSurfaceSound, 0.4F);
             if (vs != null)
@@ -59,7 +59,7 @@ public class ObjectCollisionSounds : MonoBehaviour
             }
         }
 
-        if (coll.gameObject.CompareTag("Scale") && retriggerWaitTime == 0.0f)
+        if ((coll.gameObject.CompareTag("Scale") || coll.gameObject.CompareTag("Heatplate")) && retriggerWaitTime == 0.0f)
         {
             source.PlayOneShot(HittingHardSurfaceSound, 0.5F);
             if (vs != null)
@@ -69,7 +69,7 @@ public class ObjectCollisionSounds : MonoBehaviour
             }
         }
 
-        if (coll.gameObject.CompareTag("PlasticContainer") && retriggerWaitTime == 0.0f)
+        if (coll.gameObject.CompareTag("PlasticContainer") && retriggerWaitTime == 0.0f && coll.relativeVelocity.magnitude > 1.1f)
         {
             source.PlayOneShot(OnPlasticContainer, 1.0F);
             if (vs != null)
@@ -79,7 +79,7 @@ public class ObjectCollisionSounds : MonoBehaviour
             }
         }
 
-        if (coll.gameObject.CompareTag("PlasticLid") && retriggerWaitTime == 0.0f)
+        if (coll.gameObject.CompareTag("PlasticLid") && retriggerWaitTime == 0.0f && coll.relativeVelocity.magnitude > 1.1f)
         {
             source.PlayOneShot(OnPlasticSmallObject, 1.0F);
             if (vs != null)
@@ -89,7 +89,7 @@ public class ObjectCollisionSounds : MonoBehaviour
             }
         }
 
-        if (coll.gameObject.CompareTag("MetalObject") && retriggerWaitTime == 0.0f)
+        if (coll.gameObject.CompareTag("MetalObject") && retriggerWaitTime == 0.0f && coll.relativeVelocity.magnitude > 1.0f)
         {
             source.PlayOneShot(HittingHardSurfaceSound, 0.5F);
             if (vs != null)
@@ -135,7 +135,7 @@ public class ObjectCollisionSounds : MonoBehaviour
 
             }
         }
-        if (collMat != null && collMat.name.Contains("Metall Texture") && retriggerWaitTime == 0.0f)
+        if (collMat != null && collMat.name.Contains("Metall Texture") && retriggerWaitTime == 0.0f && coll.relativeVelocity.magnitude > 1.0f)
         {
             source.PlayOneShot(HittingHardSurfaceSound, 0.4F);
             if (vs != null)

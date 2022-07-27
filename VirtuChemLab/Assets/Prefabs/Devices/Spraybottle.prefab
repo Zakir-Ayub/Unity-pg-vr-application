@@ -216,6 +216,8 @@ MonoBehaviour:
     m_InternalValue: 20
   heatFlowRate:
     m_InternalValue: 2
+  phValue:
+    m_InternalValue: 0
 --- !u!114 &3460114334396068186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,12 +345,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3cf03990d92303458ef91037227ccce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HittingHardSurfaceSound: {fileID: 8300000, guid: 3c904ec5a4c9a084784d50907240b4fd,
-    type: 3}
+  HittingHardSurfaceSound: {fileID: 8300000, guid: 3c904ec5a4c9a084784d50907240b4fd, type: 3}
   OnGlasSound: {fileID: 8300000, guid: 3c904ec5a4c9a084784d50907240b4fd, type: 3}
   OnPlasticContainer: {fileID: 8300000, guid: 3c904ec5a4c9a084784d50907240b4fd, type: 3}
-  OnPlasticSmallObject: {fileID: 8300000, guid: e0f814d2d64c8a94199098bf2e4ea090,
-    type: 3}
+  OnPlasticSmallObject: {fileID: 8300000, guid: e0f814d2d64c8a94199098bf2e4ea090, type: 3}
 --- !u!82 &8606589565857543600
 AudioSource:
   m_ObjectHideFlags: 0
@@ -733,17 +733,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37982ed845639064cbd2a0068b42dc64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enableLog: 0
-  weight:
-    m_InternalValue: 125
-  temperature:
-    m_InternalValue: 20
-  heatFlowRate:
-    m_InternalValue: 2
 --- !u!114 &4217214447916040281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,7 +745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 641e7ce34c1c0dd41ae90d5fff49ba88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleSystem: {fileID: 8069515757776432128}
+  sprayParticleSystem: {fileID: 8069515757776432128}
+  maxEmissionRateOverTime: 500
   triggerAction: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   grabAction: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1 &3869268036702680019
