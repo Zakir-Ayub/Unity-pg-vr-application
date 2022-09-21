@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - VRPlayer
+  - ChemistryObject
+  - StirringFish
+  - Chemical
+  - Dissolve
+  - Whiteboard
+  - VRLeftHand
+  - VRRightHand
+  - Floor
+  - Surface
+  - Scale
+  - PlasticContainer
+  - Text
+  - PlasticLid
+  - WaterTab
+  - Valve
+  - MetalObject
+  - GlasObject
+  - Heatplate
+  - PlasticObject
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - NaOh
+  - Water
+  - UI
+  - doorsAndFurnitures
+  - 
+  - 
+  - 
+  - LeftHandPhysics
+  - RightHandPhysics
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

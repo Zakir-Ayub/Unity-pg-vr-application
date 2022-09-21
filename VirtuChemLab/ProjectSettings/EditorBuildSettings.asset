@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Laboratory.unity
+    guid: d1f20b362b4d73b488dcc5c0d1da6b86
+  - enabled: 1
+    path: Assets/Samples/Networking/Scenes/NetworkingSampleScene.unity
+    guid: 8d4a65109873f1c4692b90323ad7f1ab
+  - enabled: 1
+    path: Assets/Scenes/SeminarRoom.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Samples/Networking/Scenes/Networking Cabinets.unity
+    guid: f5f3378654b1a494ba049dc301f2a9b9
+  - enabled: 1
+    path: Assets/Samples/Networking/Scenes/Networking Multigrab.unity
+    guid: 223dbb318a2a544e2b25e37ef724c1f5
+  - enabled: 1
+    path: Assets/Samples/Networking/Scenes/Networking Gas Burner.unity
+    guid: bb9423df34e2145d2b6401aa2b1703bb
+  - enabled: 1
+    path: Assets/Samples/Networking/Scenes/Networking Username Scene.unity
+    guid: a5e17fd2946047b43a0beb703251bba0
+  - enabled: 1
+    path: Assets/Samples/Networking/Scenes/Networking Kick.unity
+    guid: 141ce788a163d5040ba2469d5674be27
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2ff31a5d338079f4bb83baea4537aec3, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 72492d40e154fd2479508eee833b30ec, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 0fd04007c68ffcf46838e56c9e28166f, type: 2}

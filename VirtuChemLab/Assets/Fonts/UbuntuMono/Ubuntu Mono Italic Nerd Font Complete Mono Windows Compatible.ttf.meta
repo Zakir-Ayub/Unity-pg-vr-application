@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: dafc1a11c19b17f4287f28edbf6823c9
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - UbuntuMono NF
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 204d349b8b3f5a848bc9fcb3a9f911d3, type: 3}
+  - {fileID: 12800000, guid: a3bea572270e0a84c8bb4f17e794f862, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

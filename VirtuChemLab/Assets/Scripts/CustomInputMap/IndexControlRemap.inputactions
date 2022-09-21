@@ -1,0 +1,76 @@
+{
+    "name": "IndexControlRemap",
+    "maps": [
+        {
+            "name": "ValveIndexGamepad",
+            "id": "cd5f677b-43d0-4261-b219-8ac3dffbe70d",
+            "actions": [
+                {
+                    "name": "GripAndTrigger",
+                    "type": "Value",
+                    "id": "e3e7abab-6d5a-4325-8a11-3703f5a92834",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ButtonA",
+                    "type": "Button",
+                    "id": "c0d2fc4c-ccd6-4c4a-baf3-5b2807a1f7bf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "GripAndTrigger",
+                    "id": "c0932271-8d85-48bc-b750-322d8e4e1b71",
+                    "path": "OneModifier",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GripAndTrigger",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "3cd4408d-c765-4426-abda-682b34202d7d",
+                    "path": "<ValveIndexController>/gripPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GripAndTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "16ff067b-2775-40f5-af31-ed3042ec8ebb",
+                    "path": "<ValveIndexController>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GripAndTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "1ba160d4-c206-41da-b04a-26ee16404a73",
+                    "path": "<ValveIndexController>/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ButtonA",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
