@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 566372860}
   - component: {fileID: 566372859}
   - component: {fileID: 566372858}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: frontHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 6706070377660274563}
   - component: {fileID: 292848055550242974}
   - component: {fileID: 2058140686854896081}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: backHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,6 +197,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 666100931232918819, guid: d023da32fe0e31e418fb1929a2c77ab5, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3477417456852415747, guid: d023da32fe0e31e418fb1929a2c77ab5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

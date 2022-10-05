@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 7521868224892820045}
   - component: {fileID: 3617832046319607820}
   - component: {fileID: 6731319893855679914}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube.031
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,7 +725,7 @@ GameObject:
   - component: {fileID: 7521868224253822154}
   - component: {fileID: 7521868224253822157}
   - component: {fileID: 7521868224253822156}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cabinet3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -820,7 +820,7 @@ GameObject:
   - component: {fileID: 7521868224419122552}
   - component: {fileID: 7521868224419122555}
   - component: {fileID: 7521868224419122554}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cabinet5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -915,7 +915,7 @@ GameObject:
   - component: {fileID: 7521868225386892633}
   - component: {fileID: 7521868225386892632}
   - component: {fileID: 7521868225386892635}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cabinet4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1010,7 +1010,7 @@ GameObject:
   - component: {fileID: 7521868225616170058}
   - component: {fileID: 7521868225616170061}
   - component: {fileID: 7521868225616170060}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1105,7 +1105,7 @@ GameObject:
   - component: {fileID: 7521868225672851142}
   - component: {fileID: 7521868225672851161}
   - component: {fileID: 7521868225672851160}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cabinet1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1200,7 +1200,7 @@ GameObject:
   - component: {fileID: 7521868225828393170}
   - component: {fileID: 7521868225828393173}
   - component: {fileID: 7521868225828393172}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cabinet2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
